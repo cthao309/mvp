@@ -26,7 +26,7 @@ const SAMPLE_FLASHCARDS = [
     difficulty: 'medium'
   },
   {
-    id: 1,
+    id: 3,
     question: 'Merci',
     answer: 'thank you',
     difficulty: 'hard'
@@ -36,6 +36,10 @@ const SAMPLE_FLASHCARDS = [
 class App extends React.Component {
   state = {
     flashcard: SAMPLE_FLASHCARDS
+  }
+
+  handleSelectLevel(el) {
+    console.log('Select level: ', el)
   }
 
   render() {
@@ -61,7 +65,10 @@ class App extends React.Component {
               renders the first one that matches the current URL. */}
             <Switch>
               <Route path="/practice">
-                <Practice />
+                <Practice
+                  data={this.state.flashcard}
+                  handleSelectLevel={this.handleSelectLevel.bind(this)}
+                />
               </Route>
               <Route path="/addcard">
                 <Addcard />

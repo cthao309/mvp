@@ -20,7 +20,7 @@ class Addcard extends React.Component {
             <input type="text" ></input>
           </div>
           <div>
-            <label for="cars">Level of Difficulty:</label>
+            <label htmlFor="cars">Level of Difficulty:</label>
             <select id="cars">
               <option value="volvo">Easy</option>
               <option value="saab">Medium</option>
