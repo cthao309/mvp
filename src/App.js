@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,19 +18,22 @@ const SAMPLE_FLASHCARDS = [
     id: 1,
     question: 'Bonjour',
     answer: 'hello',
-    difficulty: 'easy'
+    difficulty: 'easy',
+    completed: false
   },
   {
     id: 2,
     question: 'Qui',
     answer: 'yes',
-    difficulty: 'medium'
+    difficulty: 'medium',
+    completed: false
   },
   {
     id: 3,
     question: 'Merci',
     answer: 'thank you',
-    difficulty: 'hard'
+    difficulty: 'hard',
+    completed: false
   }
 ]
 
@@ -53,6 +57,15 @@ class App extends React.Component {
 
   handleSelectLevel(el) {
     console.log('Select level: ', el)
+    axios.get(`http://localhost:5555/api/v1/${el}`)
+      .then(data => {
+        console.log('Ajax call (data) => ', data)
+      })
+      .catch(err => console.log(err))
+  }
+
+  handleSaveData(data) {
+    console.log('Save data => ', data)
   }
 
   render() {
@@ -81,6 +94,7 @@ class App extends React.Component {
                 <Practice
                   data={this.state.flashcard}
                   handleSelectLevel={this.handleSelectLevel.bind(this)}
+                  handleSaveData={this.handleSaveData.bind(this)}
                 />
               </Route>
               <Route path="/addcard">

@@ -40,6 +40,7 @@ class Card extends React.Component {
           <ul>
             <li className={this.props.disableMoveBack ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
             <li onClick={() => this.props.handleCardClick(this.props.id, 'save')} >Save</li>
+            <li onClick={() => this.props.handleCardClick(this.props.id, 'completed')} >Mark As Completed</li>
             <li className={this.props.disableMoveNext ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
           </ul>
         </div>

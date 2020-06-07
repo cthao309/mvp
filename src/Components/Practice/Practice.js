@@ -47,6 +47,15 @@ class Practice extends React.Component {
         break;
       case 'save':
         console.log('save...')
+        this.props.handleSaveData([])
+        break;
+      case 'completed':
+        console.log('mark completed...')
+        let data = this.state.data;
+        data.completed = true;
+
+        this.state.data[id] = data;
+        console.log('testing completed field => ', this.state)
         break;
       default:
         if(this.state.id === 0) {
@@ -55,6 +64,7 @@ class Practice extends React.Component {
         break;
     }
   }
+
 
   render() {
     console.log('state => ', this.state)
