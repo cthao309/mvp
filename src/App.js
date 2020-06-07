@@ -1,26 +1,80 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import Home from './Components/Home/Home.js';
+import Practice from './Components/Practice/Practice.js';
+import Addcard from './Components/Addcard/Addcard.js';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const SAMPLE_FLASHCARDS = [
+  {
+    id: 1,
+    question: 'Bonjour',
+    answer: 'hello',
+    difficulty: 'easy'
+  },
+  {
+    id: 2,
+    question: 'Qui',
+    answer: 'yes',
+    difficulty: 'medium'
+  },
+  {
+    id: 1,
+    question: 'Merci',
+    answer: 'thank you',
+    difficulty: 'hard'
+  }
+]
+
+class App extends React.Component {
+  state = {
+    flashcard: SAMPLE_FLASHCARDS
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link className="links active" to="/">Home</Link>
+                </li>
+                <li>
+                  <Link className="links" to="/practice">Practice</Link>
+                </li>
+                <li>
+                  <Link className="links" to="/addcard">Add Card</Link>
+                </li>
+              </ul>
+            </nav>
+
+            {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+            <Switch>
+              <Route path="/practice">
+                <Practice />
+              </Route>
+              <Route path="/addcard">
+                <Addcard />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
