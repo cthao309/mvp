@@ -9,7 +9,9 @@ class Practice extends React.Component {
     data: this.props.data,
     id: 0,
     disableMoveBack: true,
-    disableMoveNext: false
+    disableMoveNext: false,
+    isActiveLevel: '',
+    isActiveSubLevel: ''
   }
 
   componentDidMount() {
@@ -65,16 +67,52 @@ class Practice extends React.Component {
     }
   }
 
+  handleClickLevel(level) {
+    console.log('clicked level => ', level)
+    this.setState({ isActiveLevel: level })
+
+    this.props.handleSelectLevel(level)
+  }
+
+  handleSublevelClick(sub) {
+    console.log('Practice sub-level => ', sub);
+
+    this.setState({ isActiveSubLevel: sub })
+  }
+
 
   render() {
     console.log('state => ', this.state)
+
+    let levelClasses = ['Level_selected', 'textStyle', 'hover'];
+    let subLevelClasses = ['selected_SubLevel', 'textStyle', 'card_style_hover'];
     return (
       <div>
         <h2>Practice</h2>
-        <ul className="Level_selection">
-          <li onClick={() => this.props.handleSelectLevel('easy')}>Easy</li>
-          <li onClick={() => this.props.handleSelectLevel('medium')}>Medium</li>
-          <li onClick={() => this.props.handleSelectLevel('hard')}>Difficult</li>
+        <ul className="Level_container">
+          <li
+            className={this.state.isActiveLevel === 'easy' ? levelClasses.join(' ') + ' selectedLevel' : levelClasses.join(' ')}
+            onClick={this.handleClickLevel.bind(this, 'easy')} >Easy</li>
+          <li
+            className={this.state.isActiveLevel === 'medium' ? levelClasses.join(' ') + ' selectedLevel' : levelClasses.join(' ')}
+           onClick={this.handleClickLevel.bind(this, 'medium')} >Medium</li>
+          <li
+            className={this.state.isActiveLevel === 'hard' ? levelClasses.join(' ') + ' selectedLevel' : levelClasses.join(' ')}
+            onClick={this.handleClickLevel.bind(this, 'hard')} >Difficult</li>
+        </ul>
+        <ul className="Level_sub_container">
+          <li
+            className={this.state.isActiveSubLevel === 'viewAll' ? subLevelClasses.join(' ') + ' selectedLevel' : subLevelClasses.join(' ')}
+            onClick={this.handleSublevelClick.bind(this, 'viewAll')}
+            >View All Cards</li>
+          <li
+            className={this.state.isActiveSubLevel === 'incomplete' ? subLevelClasses.join(' ') + ' selectedLevel' : subLevelClasses.join(' ')}
+            onClick={this.handleSublevelClick.bind(this, 'incomplete')}
+            >View Only Incompleted</li>
+          <li
+            className={this.state.isActiveSubLevel === 'startPractice' ? subLevelClasses.join(' ') + ' selectedLevel' : subLevelClasses.join(' ')}
+            onClick={this.handleSublevelClick.bind(this, 'startPractice')}
+            >Start Practice</li>
         </ul>
         <Card
           card={this.state.data[this.state.id]}

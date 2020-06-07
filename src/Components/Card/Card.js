@@ -27,20 +27,20 @@ class Card extends React.Component {
           flipDirection="vertical" >
           <div className="Card_front" >
             {this.props.card.question}
-            <button className="Flip_card" onClick={this.handleClick}>Reveal</button>
+            <button className="Flip_card textStyle card_style_hover" onClick={this.handleClick}>Reveal</button>
           </div>
 
           <div className="Card_back">
             {this.props.card.answer}
-            <button className="Flip_card" onClick={this.handleClick}>Hide</button>
+            <button className="Flip_card textStyle card_style_hover" onClick={this.handleClick}>Hide</button>
           </div>
 
         </ReactCardFlip>
-        <div className="Card_movement">
+        <div className="Card_movement_container">
           <ul>
             <li className={this.props.disableMoveBack ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
-            <li onClick={() => this.props.handleCardClick(this.props.id, 'save')} >Save</li>
-            <li onClick={() => this.props.handleCardClick(this.props.id, 'completed')} >Mark As Completed</li>
+            <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'save')} >Save</li>
+            <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'completed')} >Mark As Completed</li>
             <li className={this.props.disableMoveNext ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
           </ul>
         </div>

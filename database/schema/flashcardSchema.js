@@ -6,7 +6,8 @@ const flashcardSchema = new mongoose.Schema({
   question: {type: String, require: true },
   answer: {type: String, require: true },
   difficulty: {type: String, require: true },
-  completed: false
+  completed: false,
+  owner: ''
 });
 
 const FlashcardModel = mongoose.model("Flashcard", flashcardSchema);

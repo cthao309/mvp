@@ -23,21 +23,23 @@ app.get('/api/v1/:level', (req, res) => {
 })
 
 app.post('/api/v1/', (req, res) => {
-  console.log('POST (/api/v1/) => ', res.status)
+  console.log('POST (/api/v1/) => ', req.body)
 
-  let body = {
-    question: 'Bonjour',
-    answer: 'hello',
-    difficulty: 'easy',
-    completed: false
-  }
+  Flashcard.find({'question': req.body.question})
+    .then(data => {
+      if(data.length === 0) {
+        console.log('it is not the db');
 
-  let newCard = new Flashcard(body);
-  newCard.save((err, cards) => {
-    if(err) return console.log(err);
-    return console.log('Successful save')
-  })
-
+        let newCard = new Flashcard(req.body);
+        newCard.save((err, cards) => {
+          if(err) return res.status(500).send(err);
+          res.status(201).send('successfully posted')
+        })
+      } else {
+        console.log('data is in db => ', data)
+        res.send(`You already created a card for "${data[0].question}"`)
+      }
+    })
 })
 
 app.listen(port, () => {

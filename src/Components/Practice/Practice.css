@@ -1,3 +1,35 @@
-.Level_selection {
+.Level_container {
+  height: 32px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.Level_sub_category {
   margin-bottom: 3rem;
 }
+
+.Level_selected {
+  width: 24px;
+}
+
+.selectedLevel {
+  text-decoration: underline;
+  color: red;
+  font-size: larger;
+}
+
+.selected_SubLevel {
+  width: 250px;
+}
+
+.Card_front,
+.Card_back {
+  font-family: fantasy;
+  box-shadow: 2px -1px 32px grey;
+}
+
+
+
+
+

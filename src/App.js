@@ -39,16 +39,19 @@ const SAMPLE_FLASHCARDS = [
 
 class App extends React.Component {
   state = {
-    flashcard: SAMPLE_FLASHCARDS
+    flashcard: SAMPLE_FLASHCARDS,
+    page: ''
   }
 
   componentDidMount() {
+
+
     let data = SAMPLE_FLASHCARDS;
     let len = SAMPLE_FLASHCARDS.length;
     let lastMessage = {
       id: len,
       question: 'Finished',
-      answer: 'Congratuation'
+      answer: 'Congrats'
     }
 
     data.push(lastMessage)
@@ -61,28 +64,55 @@ class App extends React.Component {
       .then(data => {
         console.log('Ajax call (data) => ', data)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log('Error GET => ', err))
   }
 
   handleSaveData(data) {
     console.log('Save data => ', data)
   }
 
+  handleAddCard(obj) {
+    console.log('Add card => ', obj)
+    axios.post(`http://localhost:5555/api/v1/`, obj)
+      .then(res => {
+        console.log('POST call (res) => ', res)
+      })
+      .catch(err => console.log('Error POST => ', err))
+  }
+
+  handleNavigationClick(page) {
+    this.setState({ page: page });
+  }
+
   render() {
+
+    let classes = ['links', 'textStyle', 'hover'];
+
     return (
       <div className="App">
         <Router>
           <div>
             <nav>
-              <ul>
+              <ul className="Navigation">
                 <li>
-                  <Link className="links active" to="/">Home</Link>
+                  <Link
+                    className={this.state.page === 'home' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'home')}
+                    to="/">
+                      Home
+                  </Link>
                 </li>
                 <li>
-                  <Link className="links" to="/practice">Practice</Link>
+                  <Link
+                    className={this.state.page === 'practice' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'practice')}
+                    to="/practice">Practice</Link>
                 </li>
                 <li>
-                  <Link className="links" to="/addcard">Add Card</Link>
+                  <Link
+                    className={this.state.page === 'addcard' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'addcard')}
+                    to="/addcard">Add Card</Link>
                 </li>
               </ul>
             </nav>
@@ -98,9 +128,12 @@ class App extends React.Component {
                 />
               </Route>
               <Route path="/addcard">
-                <Addcard />
+                <Addcard handleAddCard={this.handleAddCard.bind(this)} />
               </Route>
               <Route path="/">
+                <Home />
+              </Route>
+              <Route path="*">
                 <Home />
               </Route>
             </Switch>

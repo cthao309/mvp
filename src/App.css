@@ -22,3 +22,20 @@ ul li {
   color: red;
   font-size: larger;
 }
+
+.hover:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: red;
+  font-size: larger;
+}
+
+.Navigation {
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.Navigation li {
+  width: 100px;
+}
