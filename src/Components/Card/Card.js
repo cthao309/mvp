@@ -26,23 +26,21 @@ class Card extends React.Component {
           isFlipped={this.state.isFlipped}
           flipDirection="vertical" >
           <div className="Card_front" >
-          {this.props.card.question}
-            {/* <div>{this.props.card.question}</div> */}
+            {this.props.card.question}
             <button className="Flip_card" onClick={this.handleClick}>Reveal</button>
           </div>
 
           <div className="Card_back">
-          {this.props.card.answer}
-            {/* <div>{this.props.card.answer}</div> */}
+            {this.props.card.answer}
             <button className="Flip_card" onClick={this.handleClick}>Hide</button>
           </div>
 
         </ReactCardFlip>
         <div className="Card_movement">
           <ul>
-            <li onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
-            <li>Save</li>
-            <li onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
+            <li className={this.props.disableMoveBack ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
+            <li onClick={() => this.props.handleCardClick(this.props.id, 'save')} >Save</li>
+            <li className={this.props.disableMoveNext ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
           </ul>
         </div>
       </div>

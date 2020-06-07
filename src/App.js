@@ -38,6 +38,19 @@ class App extends React.Component {
     flashcard: SAMPLE_FLASHCARDS
   }
 
+  componentDidMount() {
+    let data = SAMPLE_FLASHCARDS;
+    let len = SAMPLE_FLASHCARDS.length;
+    let lastMessage = {
+      id: len,
+      question: 'Finished',
+      answer: 'Congratuation'
+    }
+
+    data.push(lastMessage)
+    this.setState({ flashcard: data})
+  }
+
   handleSelectLevel(el) {
     console.log('Select level: ', el)
   }

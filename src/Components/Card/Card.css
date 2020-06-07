@@ -33,3 +33,11 @@
   width: 34rem;
     margin: 3rem auto;
 }
+
+.disable {
+  pointer-events: none;
+}
+
+.active {
+  pointer-events: auto;
+}

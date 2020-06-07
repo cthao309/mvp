@@ -7,7 +7,9 @@ import './Practice.css';
 class Practice extends React.Component {
   state = {
     data: this.props.data,
-    id: 0
+    id: 0,
+    disableMoveBack: true,
+    disableMoveNext: false
   }
 
   componentDidMount() {
@@ -15,24 +17,47 @@ class Practice extends React.Component {
   }
 
   handleCardClick(id, move) {
-    console.log('Save current state...', id)
-    if(id !== 0 && move === 'back') {
-      console.log('move back a card...')
-      id = id - 1;
-      this.setState({ id: id })
-    } else if(id !== this.state.data.lenght -1 && move === 'next') {
-      id = id + 1;
-      this.setState({ id: id })
-      console.log('move to the next card...', `id: ${id}, length: ${this.state.data.length}`)
-    }  else {
-      console.log('stay at the front card...', `id: ${id}, length: ${this.state.data.length}`)
-      id = 0;
-      this.setState({ id: id})
+    console.log('(handleCardClick) id => ', id);
+
+    switch(move) {
+      case 'back':
+        if(id !== 0) {
+          console.log('move back a card...')
+          id = id - 1;
+          this.setState({ id: id })
+        } else {
+          this.setState({
+            disableMoveBack: true,
+            disableMoveNext: false
+          })
+        }
+        break;
+      case 'next':
+        if(id !== this.state.data.length -1) {
+          id = id + 1;
+          this.setState({ id: id })
+          this.setState({
+            disableMoveBack: false,
+            disableMoveNext: false
+           })
+        } else {
+          this.setState({  disableMoveNext: true })
+        }
+        console.log('move to the next card...', `id: ${id}, state.id: ${this.state.id} length: ${this.state.data.length}`)
+        break;
+      case 'save':
+        console.log('save...')
+        break;
+      default:
+        if(this.state.id === 0) {
+          this.setState({ disableMoveNext: true })
+        }
+        break;
     }
   }
 
   render() {
-
+    console.log('state => ', this.state)
     return (
       <div>
         <h2>Practice</h2>
@@ -45,6 +70,8 @@ class Practice extends React.Component {
           card={this.state.data[this.state.id]}
           id={this.state.id}
           handleCardClick={this.handleCardClick.bind(this)}
+          disableMoveBack={this.state.disableMoveBack}
+          disableMoveNext={this.state.disableMoveNext}
         />
       </div>
     )
