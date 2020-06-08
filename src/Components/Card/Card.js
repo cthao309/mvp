@@ -40,7 +40,7 @@ class Card extends React.Component {
           <ul>
             <li className={this.props.disableMoveBack ? 'disable card_style_hover' : 'active card_style_hover'} onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
             <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'save')} >Save</li>
-            <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'completed')} >Mark As Completed</li>
+            <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'completed')} >Mark Completed</li>
             <li className={this.props.disableMoveNext ? 'disable card_style_hover' : 'active card_style_hover'} onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
           </ul>
         </div>

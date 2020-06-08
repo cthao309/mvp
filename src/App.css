@@ -60,6 +60,10 @@ ul li {
   display: none;
 }
 
+/* .showNav.Navigation {
+  display: block;
+} */
+
 @media only screen and (max-width: 375px) {
   .Navigation {
     height: 210px;
@@ -149,7 +153,7 @@ ul li {
     top: 2%;
   }
 
-  .Empty_nav {
-    margin-bottom: 4rem;
-  }
+  /* .Navigation.hideNav {
+    display: none;
+  } */
 }

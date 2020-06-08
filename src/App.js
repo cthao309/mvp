@@ -105,7 +105,6 @@ class App extends React.Component {
 
   render() {
 
-    console.log('App.js (data) => ', this.state.flashcard)
     let classes = ['links', 'textStyle', 'hover'];
 
     return (
@@ -118,44 +117,42 @@ class App extends React.Component {
         </div>
         <Router>
           <div className="App_container">
-            {this.state.showNav ?
-              <nav className="Nav_container">
-                <ul className="Navigation">
-                  <li>
-                    <Link
-                      className={this.state.page === 'home' ? classes.join(' ') + ' active' : classes.join(' ')}
-                      onClick={this.handleNavigationClick.bind(this, 'home')}
-                      to="/">
-                        Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={this.state.page === 'practice' ? classes.join(' ') + ' active' : classes.join(' ')}
-                      onClick={this.handleNavigationClick.bind(this, 'practice')}
-                      to="/practice">Practice</Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={this.state.page === 'addcard' ? classes.join(' ') + ' active' : classes.join(' ')}
-                      onClick={this.handleNavigationClick.bind(this, 'addcard')}
-                      to="/addcard">Add Card</Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={this.state.page === 'createAccount' ? classes.join(' ') + ' active' : classes.join(' ')}
-                      onClick={this.handleNavigationClick.bind(this, 'createAccount')}
-                      to="/createAccount">Create Account</Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={this.state.page === 'login' ? classes.join(' ') + ' active' : classes.join(' ')}
-                      onClick={this.handleNavigationClick.bind(this, 'login')}
-                      to="/login">Sign-in</Link>
-                  </li>
-                </ul>
-              </nav> : <nav className="Empty_nav"></nav>
-            }
+            <nav className="Nav_container">
+              <ul className={ this.state.showNav ? "showNav Navigation" : "hideNav Navigation"} >
+                <li>
+                  <Link
+                    className={this.state.page === 'home' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'home')}
+                    to="/">
+                      Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={this.state.page === 'practice' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'practice')}
+                    to="/practice">Practice</Link>
+                </li>
+                <li>
+                  <Link
+                    className={this.state.page === 'addcard' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'addcard')}
+                    to="/addcard">Add Card</Link>
+                </li>
+                <li>
+                  <Link
+                    className={this.state.page === 'createAccount' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'createAccount')}
+                    to="/createAccount">Create Account</Link>
+                </li>
+                <li>
+                  <Link
+                    className={this.state.page === 'login' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'login')}
+                    to="/login">Sign-in</Link>
+                </li>
+              </ul>
+            </nav>
 
             {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
