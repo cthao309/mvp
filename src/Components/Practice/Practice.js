@@ -29,7 +29,10 @@ class Practice extends React.Component {
         if(index !== 0) {
           console.log('move back a card...')
           index = index - 1;
-          this.setState({ index: index })
+          this.setState({
+            index: index,
+            disableMoveNext: false
+          })
         } else {
           this.setState({
             disableMoveBack: true,
@@ -77,7 +80,10 @@ class Practice extends React.Component {
 
     this.setState({
       isActiveLevel: level,
-      isLevelSelected: true
+      isLevelSelected: true,
+      index: 0,
+      disableMoveBack: true,
+      disableMoveNext: false
      })
 
     this.props.handleSelectLevel(level)
