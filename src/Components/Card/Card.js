@@ -38,10 +38,10 @@ class Card extends React.Component {
         </ReactCardFlip>
         <div className="Card_movement_container">
           <ul>
-            <li className={this.props.disableMoveBack ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
+            <li className={this.props.disableMoveBack ? 'disable card_style_hover' : 'active card_style_hover'} onClick={() => this.props.handleCardClick(this.props.id, 'back')} >Previous</li>
             <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'save')} >Save</li>
             <li className="card_style_hover textStyle" onClick={() => this.props.handleCardClick(this.props.id, 'completed')} >Mark As Completed</li>
-            <li className={this.props.disableMoveNext ? 'disable' : 'active'} onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
+            <li className={this.props.disableMoveNext ? 'disable card_style_hover' : 'active card_style_hover'} onClick={() => this.props.handleCardClick(this.props.id, 'next')} >Next</li>
           </ul>
         </div>
       </div>

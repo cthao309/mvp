@@ -1,0 +1,26 @@
+.Form_addcard {
+  width: 218px;
+  margin: 0 auto;
+  border: 1px solid grey;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 12px black;
+}
+
+.Form_fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+input, select, input:focus, textarea:focus, select:focus{
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 1px 1px 6px black;
+}
+
+label {
+  text-shadow: inset 1px 1px 12px black;
+}

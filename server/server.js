@@ -45,13 +45,14 @@ app.post('/api/v1/', (req, res) => {
 
         newCard.save((err) => {
           if(err) return res.status(500).send(err);
-          res.status(201).send('successfully posted')
+          res.status(201).send('Card is created')
         })
       } else {
         console.log('data is in db => ', data)
         res.send(`You already created a card for "${data[0].question}"`)
       }
     })
+    .catch(err => res.status(500).send(err))
 })
 
 app.listen(port, () => {

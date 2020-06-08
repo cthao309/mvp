@@ -17,6 +17,12 @@ class Addcard extends React.Component {
   }
 
   clickSubmit(e) {
+    this.setState({
+      question: '',
+      answer: '',
+      difficulty: 'easy'
+    });
+
     e.preventDefault();
     this.props.handleAddCard(this.state)
   }
@@ -24,37 +30,37 @@ class Addcard extends React.Component {
   render() {
     return (
       <div>
-        <h2>Add card</h2>
-        <form onSubmit={this.clickSubmit.bind(this)}>
-          <div>
-            <label htmlFor="question">Word:</label>
+        <h2 className="textStyle">Add card</h2>
+        <form className="Form_addcard" onSubmit={this.clickSubmit.bind(this)}>
+          <div className="Form_fields">
+            <label className="textStyle" htmlFor="question">Word:</label>
             <input
               type="text"
               name="question"
               value={this.state.question}
               onChange = {this.handleInputChange.bind(this)} ></input>
           </div>
-          <div>
-            <label htmlFor="answer">Answer:</label>
+          <div className="Form_fields">
+            <label className="textStyle" htmlFor="answer">Answer:</label>
             <input
               type="text"
               name="answer"
               value={this.state.answer}
               onChange = {this.handleInputChange.bind(this)} ></input>
           </div>
-          <div>
-            <label htmlFor="difficulty">Level of Difficulty:</label>
+          <div className="Form_fields">
+            <label className="textStyle" htmlFor="difficulty">Level of Difficulty:</label>
             <select
               name="difficulty"
               value={this.state.difficulty}
               onChange={this.handleInputChange.bind(this)}>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
+              <option className="textStyle" value="easy">Easy</option>
+              <option className="textStyle" value="medium">Medium</option>
+              <option className="textStyle" value="hard">Hard</option>
             </select>
           </div>
           <div>
-            <button>Add card</button>
+            <button className="textStyle">Add card</button>
           </div>
         </form>
       </div>

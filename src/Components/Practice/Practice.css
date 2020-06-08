@@ -29,6 +29,13 @@
   box-shadow: 2px -1px 32px grey;
 }
 
+@media only screen and (max-width: 375px) {
+  .Level_sub_container {
+    font-size: smaller;
+    margin-bottom: 2rem;
+  }
+}
+
 
 
 

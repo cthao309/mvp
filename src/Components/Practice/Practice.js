@@ -104,8 +104,8 @@ class Practice extends React.Component {
     let subLevelClasses = ['selected_SubLevel', 'textStyle', 'card_style_hover'];
     return (
       <div>
-        <h2>Practice</h2>
-        <p> Select the level you wish to practice on</p>
+        <h2 className="textStyle">Practice</h2>
+        <p className="textStyle"> Select the level you wish to practice on</p>
         <ul className="Level_container">
           <li
             className={this.state.isActiveLevel === 'easy' ? levelClasses.join(' ') + ' selectedLevel' : levelClasses.join(' ')}

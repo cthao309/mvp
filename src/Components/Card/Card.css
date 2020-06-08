@@ -1,5 +1,12 @@
 .Card_front {
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
+  background-image: linear-gradient(
+    to right,
+    hsl(211, 100%, 21%),
+    hsl(179, 100%, 21%)
+  );
+  transition: background-image 0.5s linear;
+
   height: 19rem;
   width: 18rem;
   color: #fff;
@@ -9,6 +16,8 @@
   margin: 0 auto;
   border-radius: 6px;
   font-size: xxx-large;
+
+  box-shadow: inset 1px 1px 12px black;
 }
 
 .Card_back {
@@ -22,6 +31,7 @@
   margin: 0 auto;
   border-radius: 6px;
   font-size: xxx-large;
+  box-shadow: inset 1px 1px 12px black;
 }
 
 .Flip_card {
@@ -57,4 +67,5 @@
 
 .card_style_hover:hover {
   color: red;
+  cursor: pointer;
 }

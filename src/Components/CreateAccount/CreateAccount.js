@@ -1,13 +1,14 @@
 import React from 'react';
 import Modal from '../Modal/Modal.js';
 
-import './Login.css';
+import './CreateAccount.css';
 
-class Login extends React.Component {
+class CreateAccount extends React.Component {
   state = {
     first_name: '',
     last_name: '',
     password: '',
+    verify_password: '',
     showModal: false
   }
 
@@ -47,7 +48,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="textStyle">Log in</h2>
+        <h2 className="textStyle">Create Account</h2>
         <form className="Form_create_account" onSubmit={this.clickSubmit.bind(this)}>
           <div className="Form_fields">
             <label className="textStyle" htmlFor="first_name">First Name:</label>
@@ -73,8 +74,16 @@ class Login extends React.Component {
               value={this.state.password}
               onChange = {this.handleInputChange.bind(this)} ></input>
           </div>
+          <div className="Form_fields">
+            <label className="textStyle" htmlFor="verify_password">password:</label>
+            <input
+              type="password"
+              name="verify_password"
+              value={this.state.verify_password}
+              onChange = {this.handleInputChange.bind(this)} ></input>
+          </div>
           <div>
-            <button className="textStyle">Sign in</button>
+            <button className="textStyle">Create Account</button>
           </div>
         </form>
         {this.state.showModal ? <Modal showModal={this.showModal.bind(this)} message={this.state.message} heading={'Creating Account'} /> : ''}
@@ -83,4 +92,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default CreateAccount;
