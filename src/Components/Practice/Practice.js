@@ -4,41 +4,12 @@ import Card from '../Card/Card.js';
 
 import './Practice.css';
 
-const SAMPLE_FLASHCARDS = [
-  {
-    id: 1,
-    question: 'Bonjour',
-    answer: 'hello',
-    difficulty: 'easy',
-    completed: false
-  },
-  {
-    id: 2,
-    question: 'Qui',
-    answer: 'yes',
-    difficulty: 'medium',
-    completed: false
-  },
-  {
-    id: 3,
-    question: 'Merci',
-    answer: 'thank you',
-    difficulty: 'hard',
-    completed: false
-  },
-  {
-    id: 4,
-    question: 'Finished',
-    answer: 'Congrats'
-  }
-]
-
 class Practice extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: SAMPLE_FLASHCARDS,
+      data: this.props.data,
       index: 0,
       disableMoveBack: true,
       disableMoveNext: false,
@@ -48,12 +19,6 @@ class Practice extends React.Component {
     }
 
     console.log('testing practice => ', this.props.data)
-  }
-
-  componentDidMount() {
-    console.log('data => ', this.props.data);
-
-    this.setState({ flashcard: this.props.data })
   }
 
   handleCardClick(index, move) {
@@ -73,28 +38,30 @@ class Practice extends React.Component {
         }
         break;
       case 'next':
-        if(index !== this.state.data.length -1) {
+        if(index !== this.props.data.length -1) {
           index = index + 1;
-          this.setState({ index: index })
+
           this.setState({
+            index: index,
             disableMoveBack: false,
             disableMoveNext: false
            })
         } else {
-          this.setState({  disableMoveNext: true })
+          this.setState({ disableMoveNext: true })
         }
-        console.log('move to the next card...', `index: ${index}, state.index: ${this.state.index} length: ${this.state.data.length}`)
+        console.log('move to the next card...', `index: ${index}, state.index: ${this.state.index} length: ${this.props.data.length}`)
         break;
       case 'save':
         console.log('save...')
         this.props.handleSaveData([])
         break;
       case 'completed':
+        debugger
         console.log('mark completed...')
-        let data = this.state.data;
+        let data = this.props.data;
         data.completed = true;
 
-        this.state.data[index] = data;
+        this.props.data[index] = data;
         console.log('testing completed field => ', this.state)
         break;
       default:
@@ -124,7 +91,8 @@ class Practice extends React.Component {
 
 
   render() {
-    // console.log('Practice (state) => ', this.state)
+    console.log('Practice (state) => ', this.state)
+    console.log('Practice (props) => ', this.props.data)
 
     let levelClasses = ['Level_selected', 'textStyle', 'hover'];
     let subLevelClasses = ['selected_SubLevel', 'textStyle', 'card_style_hover'];
@@ -161,7 +129,7 @@ class Practice extends React.Component {
           : ''
         }
         <Card
-          card={this.state.data[this.state.index]}
+          card={this.props.data[this.state.index]}
           id={this.state.index}
           handleCardClick={this.handleCardClick.bind(this)}
           disableMoveBack={this.state.disableMoveBack}

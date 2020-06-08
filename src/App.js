@@ -14,6 +14,13 @@ import Login from './Components/Login/Login.js';
 
 import './App.css';
 
+import dummyData from './dummyData.js';
+
+let lastMessage = {
+  question: 'Finished',
+  answer: 'Congrats'
+}
+
 class App extends React.Component {
   constructor() {
     super();
@@ -24,9 +31,11 @@ class App extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.handleSelectLevel('easy')
-  // }
+  componentDidMount() {
+    lastMessage.id = dummyData.length;
+    dummyData.push(lastMessage);
+    this.setState({ flashcard: dummyData})
+  }
 
   handleSelectLevel(el) {
     console.log('Select level: ', el)
@@ -34,26 +43,19 @@ class App extends React.Component {
       .then(({data}) => {
         console.log('Ajax call (data) => ', data);
 
-        let len = data.length;
-
-        let lastMessage = {
-          id: len,
-          question: 'Finished',
-          answer: 'Congrats'
-        }
+        lastMessage.id = data.length;
 
         data.push(lastMessage)
 
         this.setState({
           flashcard: data,
-          dataLen: len
          })
       })
       .catch(err => console.log('Error GET => ', err))
   }
 
   handleSaveData(data) {
-    // console.log('Save data => ', data)
+    console.log('Save data => ', data)
   }
 
   handleAddCard(obj) {
