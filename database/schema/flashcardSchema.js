@@ -3,6 +3,7 @@ const db = require('../config/mongodbConfig.js');
 
 
 const flashcardSchema = new mongoose.Schema({
+  id: Number,
   question: {type: String, require: true },
   answer: {type: String, require: true },
   difficulty: {type: String, require: true },

@@ -24,14 +24,26 @@ app.get('/api/v1/:level', (req, res) => {
 
 app.post('/api/v1/', (req, res) => {
   console.log('POST (/api/v1/) => ', req.body)
+  let size;
+  let body = req.body;
 
-  Flashcard.find({'question': req.body.question})
+  Flashcard.count({}, (err, dataSize) => {
+    if(err) {
+      size = 0;
+    } else {
+      size = dataSize
+    }
+  });
+
+  Flashcard.find({'question': body.question})
     .then(data => {
       if(data.length === 0) {
         console.log('it is not the db');
 
-        let newCard = new Flashcard(req.body);
-        newCard.save((err, cards) => {
+        body.id = size;
+        let newCard = new Flashcard(body);
+
+        newCard.save((err) => {
           if(err) return res.status(500).send(err);
           res.status(201).send('successfully posted')
         })

@@ -10,69 +10,53 @@ import {
 import Home from './Components/Home/Home.js';
 import Practice from './Components/Practice/Practice.js';
 import Addcard from './Components/Addcard/Addcard.js';
+import Login from './Components/Login/Login.js';
 
 import './App.css';
 
-const SAMPLE_FLASHCARDS = [
-  {
-    id: 1,
-    question: 'Bonjour',
-    answer: 'hello',
-    difficulty: 'easy',
-    completed: false
-  },
-  {
-    id: 2,
-    question: 'Qui',
-    answer: 'yes',
-    difficulty: 'medium',
-    completed: false
-  },
-  {
-    id: 3,
-    question: 'Merci',
-    answer: 'thank you',
-    difficulty: 'hard',
-    completed: false
-  }
-]
-
 class App extends React.Component {
-  state = {
-    flashcard: SAMPLE_FLASHCARDS,
-    page: ''
-  }
+  constructor() {
+    super();
 
-  componentDidMount() {
-
-
-    let data = SAMPLE_FLASHCARDS;
-    let len = SAMPLE_FLASHCARDS.length;
-    let lastMessage = {
-      id: len,
-      question: 'Finished',
-      answer: 'Congrats'
+    this.state = {
+      flashcard: [],
+      dataLen: 0
     }
-
-    data.push(lastMessage)
-    this.setState({ flashcard: data})
   }
+
+  // componentDidMount() {
+  //   this.handleSelectLevel('easy')
+  // }
 
   handleSelectLevel(el) {
     console.log('Select level: ', el)
     axios.get(`http://localhost:5555/api/v1/${el}`)
-      .then(data => {
-        console.log('Ajax call (data) => ', data)
+      .then(({data}) => {
+        console.log('Ajax call (data) => ', data);
+
+        let len = data.length;
+
+        let lastMessage = {
+          id: len,
+          question: 'Finished',
+          answer: 'Congrats'
+        }
+
+        data.push(lastMessage)
+
+        this.setState({
+          flashcard: data,
+          dataLen: len
+         })
       })
       .catch(err => console.log('Error GET => ', err))
   }
 
   handleSaveData(data) {
-    console.log('Save data => ', data)
+    // console.log('Save data => ', data)
   }
 
   handleAddCard(obj) {
-    console.log('Add card => ', obj)
     axios.post(`http://localhost:5555/api/v1/`, obj)
       .then(res => {
         console.log('POST call (res) => ', res)
@@ -86,6 +70,7 @@ class App extends React.Component {
 
   render() {
 
+    console.log('App.js (data) => ', this.state.flashcard)
     let classes = ['links', 'textStyle', 'hover'];
 
     return (
@@ -114,6 +99,12 @@ class App extends React.Component {
                     onClick={this.handleNavigationClick.bind(this, 'addcard')}
                     to="/addcard">Add Card</Link>
                 </li>
+                <li>
+                  <Link
+                    className={this.state.page === 'login' ? classes.join(' ') + ' active' : classes.join(' ')}
+                    onClick={this.handleNavigationClick.bind(this, 'login')}
+                    to="/login">Log-in</Link>
+                </li>
               </ul>
             </nav>
 
@@ -129,6 +120,9 @@ class App extends React.Component {
               </Route>
               <Route path="/addcard">
                 <Addcard handleAddCard={this.handleAddCard.bind(this)} />
+              </Route>
+              <Route path="/login">
+                <Login />
               </Route>
               <Route path="/">
                 <Home />

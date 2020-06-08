@@ -26,12 +26,12 @@ class Card extends React.Component {
           isFlipped={this.state.isFlipped}
           flipDirection="vertical" >
           <div className="Card_front" >
-            {this.props.card.question}
+            {this.props.card && this.props.card.question}
             <button className="Flip_card textStyle card_style_hover" onClick={this.handleClick}>Reveal</button>
           </div>
 
           <div className="Card_back">
-            {this.props.card.answer}
+            {this.props.card && this.props.card.answer}
             <button className="Flip_card textStyle card_style_hover" onClick={this.handleClick}>Hide</button>
           </div>
 
