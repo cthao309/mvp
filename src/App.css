@@ -31,11 +31,27 @@ ul li {
 }
 
 .Navigation {
-  height: 32px;
+  height: 80px;
   display: flex;
   align-items: center;
+  margin-top: 0;
+
+  background-image: linear-gradient(
+    to right,
+    hsl(211, 100%, 50%),
+    hsl(179, 100%, 30%)
+  );
+  transition: background-image 0.5s linear;
 }
 
 .Navigation li {
   width: 100px;
+}
+
+.App_container {
+  /* background-image: url(/static/media/background.66911c37.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh; */
 }

@@ -78,7 +78,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <div>
+          <div className="App_container">
             <nav>
               <ul className="Navigation">
                 <li>
