@@ -1,0 +1,72 @@
+table.Cardlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+th, td {
+  width: 150px;
+  text-align: left;
+}
+tbody tr {
+  margin-bottom: 1rem;
+}
+
+tbody tr:not(last-child) {
+  border-bottom: 1px solid black;
+}
+
+th.reduceSize,
+th:last-child {
+  width: 55px;
+}
+
+tbody tr td:first-child,
+tbody tr td:last-child {
+  width: 55px;
+}
+
+.bodyContent {
+
+  text-align: center;
+}
+
+thead {
+  color: black;
+}
+
+tbody {
+  text-align: center;
+}
+
+td:hover {
+  cursor: pointer;
+  color: darkgreen;
+  text-shadow: 0px 1px 2px yellowgreen;
+}
+
+td:hover + td {
+  cursor: pointer;
+  color: darkgreen;
+  text-shadow: 0px 1px 2px yellowgreen;
+}
+
+.clearBtn {
+  margin-bottom: 1.5rem;
+}
+
+.done {
+  text-decoration: line-through;
+  color: darkgrey;
+  text-decoration-color: red;
+}
+
+.show {
+  display: block;
+}
+
+.editMode:hover {
+  color: red;
+}
+

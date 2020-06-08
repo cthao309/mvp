@@ -20,13 +20,24 @@
 }
 
 .selected_SubLevel {
-  width: 250px;
+  width: 120px;
+}
+
+.selectedSubLevel {
+  color: red;
 }
 
 .Card_front,
 .Card_back {
   font-family: fantasy;
   box-shadow: 2px -1px 32px grey;
+}
+
+.Level_sub_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-left: 0;
 }
 
 @media only screen and (max-width: 375px) {
