@@ -17,6 +17,7 @@ const CardList = ({cards, removeListItem, handleClickOnEditList}) => {
           item={item}
           removeListItem={removeListItem}
           handleClickOnEditList={handleClickOnEditList}
+          removeListItem={removeListItem}
         />
   })
 

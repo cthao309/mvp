@@ -65,10 +65,10 @@ class CardListEntry extends React.Component {
   }
 
   handleRemoveItemFromList(event) {
-    let clickedItemId = event.props.item.id;
+    console.log('deleting => ', event.props.item.difficulty, event.props.item._id)
 
     // invoke the method to modify the grocery list
-    // this.props.removeListItem(clickedItemId)
+    this.props.removeListItem(event.props.item._id, event.props.item.difficulty)
   }
   render() {
 

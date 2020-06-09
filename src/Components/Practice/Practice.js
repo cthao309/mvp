@@ -137,6 +137,7 @@ class Practice extends React.Component {
           <CardList
             cards={this.props.data}
             handleClickOnEditList={this.props.handleClickOnEditList}
+            removeListItem={this.props.removeListItem}
           />
         }
         {this.state.activeSubLevel === 'startPractice' &&

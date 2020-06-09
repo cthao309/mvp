@@ -120,6 +120,20 @@ class App extends React.Component {
       }).catch(err => console.log(err))
   }
 
+  removeListItem(itemId, level) {
+    // invoke a ajax DELETE method to JSON server
+    axios.delete(`http://localhost:5555/api/v1/${itemId}`)
+      .then((res) => {
+        if(res === 'error') {
+          console.log('Error updating => ', res)
+        } else {
+          console.log('Successfully Deleting => ', res)
+          this.handleSelectLevel(level)
+        }
+      }).catch(err => console.log(err))
+
+  }
+
   render() {
 
     let classes = ['links', 'textStyle', 'hover'];
@@ -180,6 +194,7 @@ class App extends React.Component {
                   handleSelectLevel={this.handleSelectLevel.bind(this)}
                   handleSaveData={this.handleSaveData.bind(this)}
                   handleClickOnEditList={this.handleClickOnEditList.bind(this)}
+                  removeListItem={this.removeListItem.bind(this)}
                 />
               </Route>
               <Route path="/addcard">

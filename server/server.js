@@ -81,6 +81,16 @@ app.put('/api/v1/', (req, res) => {
     })
 });
 
+app.delete('/api/v1/:id', (req, res) => {
+  Flashcard.deleteOne({'_id': req.params.id}, (err, msg) => {
+    if(err) {
+      res.status(500).send('error')
+    } else {
+      res.status(201).send('success');
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`Server is listening on port: http://localhost:${port}`)
 })
