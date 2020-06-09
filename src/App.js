@@ -34,6 +34,8 @@ class App extends React.Component {
       message: '',
       showNav: false
     }
+
+    this.handleSelectLevel = this.handleSelectLevel.bind(this);
   }
 
   componentDidMount() {
@@ -103,6 +105,21 @@ class App extends React.Component {
     this.setState({ showNav: !this.state.showNav })
   }
 
+  handleClickOnEditList(updateObj) {
+    // console.log('Update => ', updateObj.oldLevel, updateObj)
+
+    // invoke a ajax PUT method to JSON server
+    axios.put(`http://localhost:5555/api/v1/`, updateObj)
+      .then((res) => {
+        if(res === 'error') {
+          console.log('Error updating => ', res)
+        } else {
+          console.log('Successfully updating => ', res)
+          this.handleSelectLevel(updateObj.oldLevel)
+        }
+      }).catch(err => console.log(err))
+  }
+
   render() {
 
     let classes = ['links', 'textStyle', 'hover'];
@@ -162,6 +179,7 @@ class App extends React.Component {
                   data={this.state.flashcard}
                   handleSelectLevel={this.handleSelectLevel.bind(this)}
                   handleSaveData={this.handleSaveData.bind(this)}
+                  handleClickOnEditList={this.handleClickOnEditList.bind(this)}
                 />
               </Route>
               <Route path="/addcard">

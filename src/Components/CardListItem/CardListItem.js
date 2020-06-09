@@ -4,17 +4,19 @@ class CardListEntry extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('list entry => ', this.props)
+    console.log('CardListItem => ', this.props)
+
     // initialize the state
     this.state = {
       isDone: false,
       isEditing: false,
       id: this.props.id,
-      db_id: this.props.db_id,
+      _id: this.props._id,
       question: this.props.item.question,
       answer: this.props.item.answer,
-      difficulty: this.props.item.difficulty,
-      completed: this.props.item.completed || 'false'
+      difficulty: this.props.item.difficulty === undefined ? 'easy' : this.props.item.difficulty,
+      oldLevel: this.props.item.difficulty === undefined ? 'easy' : this.props.item.difficulty,
+      completed: this.props.item.completed === undefined ? 'false' : this.props.item.completed
     }
 
     this.forceReRender = this.forceReRender.bind(this);
@@ -36,15 +38,10 @@ class CardListEntry extends React.Component {
   }
 
   handleEditList(event) {
-    let oldItemId = event.props.item.id;
-
-    let modifiedGroceryItem = {
-      item: this.state.item,
-      quantity: this.state.quantity
-    }
+    console.log('Modified obj => ', this.state)
 
     // invoke the handleClickOnEditList method to update the DOM
-    // this.props.handleClickOnEditList(oldItemId, modifiedGroceryItem);
+    this.props.handleClickOnEditList(this.state);
 
     this.forceReRender();
   }
@@ -57,7 +54,14 @@ class CardListEntry extends React.Component {
   }
 
   forceReRender(event) {
-    this.setState({ isEditing: !this.state.isEditing });
+    this.setState({
+      isEditing: !this.state.isEditing,
+      // question: this.props.item.question,
+      // answer: this.props.item.answer,
+      // difficulty: this.props.item.difficulty === undefined ? 'easy' : this.props.item.difficulty,
+      // oldLevel: this.props.item.difficulty === undefined ? 'easy' : this.props.item.difficulty,
+      // completed: this.props.item.completed === undefined ? 'false' : this.props.item.completed
+     });
   }
 
   handleRemoveItemFromList(event) {
@@ -68,10 +72,9 @@ class CardListEntry extends React.Component {
   }
   render() {
 
+    console.log('CardListItem (render) =>[state]: ', this.statte)
     let classes = [];
     if(this.state.isDone) { classes.push('done')}
-
-    console.log('Card item => ', this.props)
 
     return (
       this.state.isEditing ? (<tr>
@@ -97,22 +100,23 @@ class CardListEntry extends React.Component {
             </input>
           </td>
           <td>
-            <input
-              onChange = {this.handleInputChange}
-              type='text'
+            <select
               name="difficulty"
-              placeholder={this.state.difficulty}
-              value={this.state.difficulty}>
-            </input>
+              value={this.state.difficulty}
+              onChange={this.handleInputChange}>
+              <option className="textStyle" value="easy">Easy</option>
+              <option className="textStyle" value="medium">Medium</option>
+              <option className="textStyle" value="hard">Hard</option>
+            </select>
           </td>
           <td>
-            <input
-              onChange = {this.handleInputChange}
-              type='text'
+            <select
               name="completed"
-              placeholder={this.state.completed}
-              value={this.state.completed}>
-            </input>
+              value={this.state.completed}
+              onChange={this.handleInputChange}>
+              <option className="textStyle" value="false">False</option>
+              <option className="textStyle" value="true">True</option>
+            </select>
           </td>
           <td>
             <span onClick = {(event) => this.handleEditList(this, event)} className="editMode"> <i className="fa fa-database"></i> </span>
@@ -135,7 +139,7 @@ class CardListEntry extends React.Component {
               {this.props.item.difficulty}
             </td>
             <td onClick = {() => this.handleClickOnList(this)} className = {classes.join(' ') + ' completed'}>
-              {this.props.item.completed !== undefined ? this.props.item.completed : 'false'}
+              {this.props.item.completed ? 'True' : 'False'}
             </td>
             <td>
               <span onClick = {(event) => this.toggleUI(this, event)} className="editMode"> <i className="fa fa-edit"></i> </span>

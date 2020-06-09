@@ -134,7 +134,10 @@ class Practice extends React.Component {
           : ''
         }
         {this.state.activeSubLevel === 'viewAll' &&
-          <CardList cards={this.props.data} />
+          <CardList
+            cards={this.props.data}
+            handleClickOnEditList={this.props.handleClickOnEditList}
+          />
         }
         {this.state.activeSubLevel === 'startPractice' &&
           <Card

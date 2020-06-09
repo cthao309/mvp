@@ -11,10 +11,10 @@ const CardList = ({cards, removeListItem, handleClickOnEditList}) => {
 
   let cardList = data.map((item, index) => {
     return <CardListItem
-          id={index}
-          db_id={item._id}
-          item={item}
           key={item._id}
+          id={index}
+          _id={item._id}
+          item={item}
           removeListItem={removeListItem}
           handleClickOnEditList={handleClickOnEditList}
         />

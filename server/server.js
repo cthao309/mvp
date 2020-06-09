@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const Flashcard = require('../database/schema/flashcardSchema.js')
@@ -10,6 +11,7 @@ const port = 5555;
 app.use(morgan('dev'));
 
 app.use(cors())
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -53,7 +55,31 @@ app.post('/api/v1/', (req, res) => {
       }
     })
     .catch(err => res.status(500).send(err))
-})
+});
+
+app.put('/api/v1/', (req, res) => {
+  let body = {...req.body};
+  delete body.isDone;
+  delete body.isEditing;
+  delete body.oldLevel;
+
+  Flashcard.update(
+    {'_id': body._id},
+    {
+      id: body.id,
+      question: body.question,
+      answer: body.answer,
+      difficulty: body.difficulty,
+      completed: body.completed === 'false' ? false : true,
+      owner: 'user'
+    }, (err, msg) => {
+      if(err) {
+        res.status(500).send('error');
+      } else {
+        res.status(201).send('success');
+      }
+    })
+});
 
 app.listen(port, () => {
   console.log(`Server is listening on port: http://localhost:${port}`)
